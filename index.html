@@ -89,9 +89,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#gallery">Gallery</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -239,12 +239,35 @@
             <div class="card-body">
               <h5 class="card-title">Faith @ Home</h5>
               <p class="card-text">
-                Sebuah website untuk informasi gereja GKIm Gloria
+                Sebuah website untuk portofolio gereja GKIm Gloria Bandung. Jl.
+                Moh Toha 69 A Bandung
               </p>
               <a
                 href="https://gkimgloria.org/"
                 class="btn btn-primary"
                 target="_blank"
+                >Go somewhere</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mt-5" data-aos="flip-down">
+          <div class="card" style="width: 18rem">
+            <img
+              src="/images/absen.gif"
+              data-original="/images/absen.gif"
+              class="card-img-top"
+              alt="gkim-gloria"
+              style="height: auto"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Absensi Jemaat Gereja</h5>
+              <p class="card-text">
+                Sebuah website absensi untuk gereja GKIm Gloria Bandung, untuk
+                mendata jemaat tetap dan simpatisan gereja.
+              </p>
+              <a href="#" class="btn btn-danger disabled" target="_blank"
                 >Go somewhere</a
               >
             </div>
@@ -539,19 +562,15 @@
 
     <script>
       function changeImage(element) {
-        // Ganti atribut 'src' dengan nilai dari 'data-hover'
         element.src = element.getAttribute("data-hover");
       }
 
       function resetImage(element) {
-        // Ganti atribut 'src' dengan nilai dari 'data-original'
         element.src = element.getAttribute("data-original");
       }
 
-      // Get the current year
       let currentYear = new Date().getFullYear();
 
-      // Update the content of the span element with the current year
       document.getElementById("yearSpan").textContent =
         "© " + currentYear + " Edwin Jhon Vangel S";
     </script>
