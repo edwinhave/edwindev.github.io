@@ -89,9 +89,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#gallery">Gallery</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -462,6 +462,7 @@
         </div>
       </div>
     </div>
+
     <div style="opacity: 0; height: 1000px"></div>
     <div
       class="paralax img-responsive"
@@ -542,6 +543,114 @@
       <!-- Gallery -->
     </div>
 
+    <div style="opacity: 0; height: 1000px"></div>
+    <div
+      class="paralax img-responsive"
+      style="background-image: url(/images/P1160251.JPG)"
+    ></div>
+
+    <br id="contact" />
+    <div class="position-relative">
+      <p class="text-center fs-1 fw-bold text-info-emphasis">Hubungi Saya</p>
+    </div>
+
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm p-4">
+            <h3 class="mb-4 text-center">Mari tanya-tanya</h3>
+
+            <!-- Notifikasi Sukses / Gagal -->
+            <div id="formAlert" class="alert d-none" role="alert"></div>
+
+            <form id="projectForm">
+              <!-- Nama -->
+              <div class="mb-3">
+                <label for="nama" class="form-label">Nama Lengkap</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nama"
+                  id="nama"
+                  placeholder="Masukkan nama Anda"
+                  required
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Alamat Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="nama@email.com"
+                  required
+                />
+              </div>
+
+              <!-- Kebutuhan -->
+              <div class="mb-3">
+                <label for="kebutuhan" class="form-label">Kebutuhan</label>
+                <select
+                  class="form-select"
+                  name="kebutuhan"
+                  id="kebutuhan"
+                  required
+                >
+                  <option value="" selected disabled>
+                    Pilih kebutuhan Anda
+                  </option>
+                  <option value="Buat Website">Buat Website</option>
+                  <option value="Perbaikan/Migrasi Sistem">
+                    Perbaikan/Migrasi Sistem
+                  </option>
+                  <option value="Desain / Multimedia">
+                    Desain / Multimedia
+                  </option>
+                </select>
+              </div>
+
+              <!-- Keterangan -->
+              <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                <textarea
+                  class="form-control"
+                  name="keterangan"
+                  id="keterangan"
+                  rows="4"
+                  placeholder="Jelaskan detail proyek atau fitur yang Anda inginkan..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Informasi Lainnya -->
+              <div class="mb-4">
+                <label for="infoLainnya" class="form-label"
+                  >Informasi Lainnya (Opsional)</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="infoLainnya"
+                  id="infoLainnya"
+                  placeholder="Catatan tambahan, tautan referensi, atau tenggat waktu"
+                />
+              </div>
+
+              <!-- Tombol Kirim -->
+              <div class="d-grid">
+                <button type="submit" id="submitBtn" class="btn btn-primary">
+                  Kirim Pengajuan
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer Section -->
     <footer
       class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
@@ -583,6 +692,48 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
+    </script>
+    <!-- JAVASCRIPT UNTUK INTEGRASI KE GOOGLE SHEETS -->
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbwpNBct3rnPEVnCQfqciMYxlq_cdDXtPZFOeNQ27FUVNXBh0t2dWmzrGLi2r9LAM8jGUw/exec";
+      const form = document.getElementById("projectForm");
+      const alertBox = document.getElementById("formAlert");
+      const submitBtn = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Mencegah halaman reload saat submit
+
+        // Mengubah tampilan tombol menjadi loading
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Mengirim...";
+
+        // Mengirim data form ke Google Apps Script
+        fetch(scriptURL, {
+          method: "POST",
+          body: new FormData(form),
+        })
+          .then((response) => {
+            // Tampilkan alert sukses
+            alertBox.className = "alert alert-success";
+            alertBox.innerText =
+              "Terima kasih! Pengajuan Anda berhasil dikirim.";
+
+            // Reset form dan tombol
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Kirim Pengajuan";
+          })
+          .catch((error) => {
+            // Tampilkan alert error jika gagal
+            alertBox.className = "alert alert-danger";
+            alertBox.innerText = "Oops! Terjadi kesalahan saat mengirim data.";
+            console.error("Error!", error.message);
+
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Kirim Pengajuan";
+          });
+      });
     </script>
   </body>
 </html>
